@@ -11,14 +11,23 @@ public class Shape : MonoBehaviour
     public string ShapeName
     {
         get { return m_shapeName;  }
-        set { m_shapeName = value; }
+        set { 
+            if (value.Length > 15)
+            {
+                Debug.Log("The name's length mustn't exceed 15 characters!");
+            }
+            else
+            {
+                m_shapeName = value;
+            }
+        }
     }
     private Color m_color = new Color32(133, 79, 55, 1);
     //ENCAPSULATION
     public Color Color
     {
         get { return m_color; }
-        set { m_color = value; }
+        set { m_color = value;}
     }
 
     protected void Start()
@@ -26,7 +35,7 @@ public class Shape : MonoBehaviour
         gameObject.GetComponent<Renderer>().material.color = Color;
     }
 
-    protected virtual void DisplayText()
+    public virtual void DisplayText()
     {
         message.text = ShapeName;
         message.gameObject.SetActive(true);
